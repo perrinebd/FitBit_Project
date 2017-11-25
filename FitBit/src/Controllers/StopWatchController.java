@@ -24,7 +24,7 @@ public class StopWatchController extends JFrame {
 
         // group buttons together
         buttonArea = new JPanel();
-        buttonArea.setLayout(new GridLayout(1,3));
+        buttonArea.setLayout(new GridLayout(1, 3));
         contentPane.add(buttonArea, BorderLayout.SOUTH);
 
         // three buttons, each with a listener to trigger start
@@ -48,10 +48,11 @@ public class StopWatchController extends JFrame {
         view = new View.StopWatch(model);
         contentPane.add(view, BorderLayout.CENTER);
 
+        // create a timer using the swing.util
         timer =
                 new Timer(100, e -> {
                     // arithmatic to get timer to count properly
-                    int seconds = (int)(System.currentTimeMillis() - startTime)/1000;
+                    int seconds = (int) (System.currentTimeMillis() - startTime) / 1000;
                     int days = seconds / 86400;
                     int hours = (seconds / 3600) - (days * 24);
                     int min = (seconds / 60) - (days * 1440) - (hours * 60);
@@ -64,21 +65,6 @@ public class StopWatchController extends JFrame {
                     // update view to display new model values
                     view.updateUI();
                 });
-
-/*
-        startButton.addActionListener(ae -> {
-            startTime = System.currentTimeMillis();
-            timer.start();
-            view.repaint();
-            setLabels();
-        });
-
-        resetButton.addActionListener(aer -> {
-                timer.restart();
-                view.repaint();
-                setLabels();
-
-        });*/
     }
 
     public void ActionHandler(ActionEvent event)
