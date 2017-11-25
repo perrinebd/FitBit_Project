@@ -1,4 +1,4 @@
-package DataLogic;
+package DataLogic.Interfaces;
 
 public interface ITimerDataLogic {
     void start();

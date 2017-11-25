@@ -1,4 +1,4 @@
-package DataLogic;
+package DataLogic.Interfaces;
 
 import Models.HRMonitor;
 import Models.User;

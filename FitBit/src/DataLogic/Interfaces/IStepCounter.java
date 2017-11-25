@@ -1,7 +1,7 @@
-package DataLogic;
+package DataLogic.Interfaces;
 
 public interface IStepCounter {
-    Boolean inMotion();
+    boolean inMotion();
     void start();
     void stop();
     void reset();
