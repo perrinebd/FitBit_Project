@@ -44,13 +44,14 @@ public class StopWatchController extends JFrame {
 
         // get model and view objects for display
         model = new Models.Timer();
-        model.setMinutes(1);
         view = new View.StopWatch(model);
+
         contentPane.add(view, BorderLayout.CENTER);
 
         // create a timer using the swing.util
         timer =
                 new Timer(100, e -> {
+
                     // arithmatic to get timer to count properly
                     int seconds = (int) (System.currentTimeMillis() - startTime) / 1000;
                     int days = seconds / 86400;
@@ -85,8 +86,8 @@ public class StopWatchController extends JFrame {
     }
 
     public static void main(String[] args) {
-        StopWatchController application = new StopWatchController();
-        application.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        application.setVisible(true);
+        StopWatchController controller = new StopWatchController();
+        controller.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        controller.setVisible(true);
     }
 }
