@@ -5,11 +5,12 @@ import View.StopWatch;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
-public class StopWatchController extends JFrame {
+public class StopWatchController extends JFrame implements ActionListener{
     private JLabel secondsLabel, minuteLabel;
-    private JButton startButton, stopButton, resetButton;
+    private JButton rightButton, leftButton;
     private JPanel buttonArea;
     private Container contentPane;
     private View.StopWatch view;
@@ -23,7 +24,7 @@ public class StopWatchController extends JFrame {
         contentPane = getContentPane();
         setSize(250, 150);
         setTitle("Stop Watch");
-        AddButtons();
+        AddButtons("Start", "Stop");
 
         // get model and view objects for display
         model = new Models.Timer();
@@ -39,7 +40,7 @@ public class StopWatchController extends JFrame {
     }
 
     private Timer CreateTimer(){
-        return new Timer(1000, e -> {
+        return new Timer(100, e -> {
 
             // arithmatic to get timer to count properly
             int seconds = (int) (System.currentTimeMillis() - startTime) / 1000;
@@ -57,54 +58,49 @@ public class StopWatchController extends JFrame {
         });
     }
 
-    public void ActionHandler(ActionEvent event)
+    public void actionPerformed(ActionEvent event)
     {
-        int resetCount = 0;
         if (event.getActionCommand().equals("Start")) {
             this.startTime = System.currentTimeMillis();
             this.timer.start();
+            this.leftButton.setText("Reset");
+            this.leftButton.setActionCommand("Reset");
+
         }
-        else if (event.getActionCommand().equals("Reset")) {
+        else if (event.getActionCommand().equals("Reset")){
             this.startTime = System.currentTimeMillis();
-            resetCount++;
             this.timer.restart();
         }
-
         else if (event.getActionCommand().equals("Stop"))
             this.timer.stop();
-        if (resetCount > 2) {
-            this.removeButtons();
-            System.out.print(resetCount);
-        }
-        this.view.updateUI();
 
+
+      this.view.updateUI();
     }
 
-    public void AddButtons(){
-        // group buttons together
+    public void AddButtons(String lName, String rName) {
+
+        // group buttons in grid for contentPane
         buttonArea = new JPanel();
-        buttonArea.setLayout(new GridLayout(1, 3));
+        buttonArea.setLayout(new GridLayout(1, 2));
         contentPane.add(buttonArea, BorderLayout.SOUTH);
 
-        // three buttons, each with a listener to trigger start
-        startButton = new JButton("Start");
+        // two buttons representing taps on either screen side
+        leftButton = new JButton(lName);
+        leftButton.addActionListener(this::actionPerformed);
 
-        startButton.addActionListener(this::ActionHandler);
-
-        stopButton = new JButton("Stop");
-        stopButton.addActionListener(this::ActionHandler);
-
-        resetButton = new JButton("Reset");
-        resetButton.addActionListener(this::ActionHandler);
+        rightButton = new JButton(rName);
+        rightButton.addActionListener(this::actionPerformed);
 
         // add buttons to the button area
-        buttonArea.add(startButton);
-        buttonArea.add(stopButton);
-        buttonArea.add(resetButton);
+        buttonArea.add(leftButton);
+        buttonArea.add(rightButton);
+
     }
 
-    public void removeButtons(){
-        this.buttonArea.removeAll();
+    public void removeView(){
+        view.removeComponent();
+        this.contentPane.remove(buttonArea);
     }
 
     public static void main(String[] args) {

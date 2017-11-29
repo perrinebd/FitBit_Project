@@ -1,22 +1,34 @@
 package View;
-
 import javax.swing.*;
 import java.awt.*;
 
-public class StepCounter extends JFrame {
-    JFrame frame;
-    JPanel converterPanel;
-    JPanel buttonPanel;
+public class StepCounter extends JPanel {
+    private Models.StepCounter model;
+    private Graphics2D currPane;
 
-    public StepCounter(JFrame frame){
-        frame = new JFrame("Convert Celsius to Fahrenheit");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(new Dimension(120, 40));
+    // pass the view a model to render
+    public StepCounter(Models.StepCounter count) {
+        this.model = count;
+    }
 
-        //Create and set up the panel.
-        buttonPanel = new JPanel(new GridLayout(2, 2));
+    public void paintComponent(Graphics g) {
 
-        this.frame = frame;
+        // create new pane to paint from base Graphic obj g
+        super.paintComponent(g);
+        currPane = (Graphics2D) g;
 
+        // model info to display
+        int steps = model.getDisplaySteps();
+        model.setTotalSteps(1);
+        model.setCurrSteps(3);
+
+        currPane.setFont(new Font("Helvetica", Font.BOLD, 40));
+        // render info
+        String displayText = String.format("%d", steps);
+        currPane.drawString(displayText, 50, 50);
+    }
+
+    public void removeComponent(){
+        currPane.dispose();
     }
 }
