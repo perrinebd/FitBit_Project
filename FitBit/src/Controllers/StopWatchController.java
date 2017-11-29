@@ -1,5 +1,7 @@
 package Controllers;
 
+import View.StopWatch;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -19,9 +21,66 @@ public class StopWatchController extends JFrame {
 
         // create GUI info for stopwatch
         contentPane = getContentPane();
-        setSize(400, 400);
+        setSize(250, 150);
         setTitle("Stop Watch");
+        AddButtons();
 
+        // get model and view objects for display
+        model = new Models.Timer();
+        view = CreateView();
+        contentPane.add(view, BorderLayout.CENTER);
+
+        timer = CreateTimer();
+
+    }
+
+    private StopWatch CreateView(){
+        return new View.StopWatch(model);
+    }
+
+    private Timer CreateTimer(){
+        return new Timer(1000, e -> {
+
+            // arithmatic to get timer to count properly
+            int seconds = (int) (System.currentTimeMillis() - startTime) / 1000;
+            int days = seconds / 86400;
+            int hours = (seconds / 3600) - (days * 24);
+            int min = (seconds / 60) - (days * 1440) - (hours * 60);
+            int sec = seconds % 60;
+
+            // pass new data to model
+            model.setMinutes(min);
+            model.setSeconds(sec);
+
+            // update view to display new model values
+            view.updateUI();
+        });
+    }
+
+    public void ActionHandler(ActionEvent event)
+    {
+        int resetCount = 0;
+        if (event.getActionCommand().equals("Start")) {
+            this.startTime = System.currentTimeMillis();
+            this.timer.start();
+        }
+        else if (event.getActionCommand().equals("Reset")) {
+            this.startTime = System.currentTimeMillis();
+            resetCount++;
+            this.timer.restart();
+        }
+
+        else if (event.getActionCommand().equals("Stop"))
+            this.timer.stop();
+        if (resetCount > 2) {
+            this.removeButtons();
+            System.out.print(resetCount);
+        }
+        this.view.updateUI();
+
+    }
+
+    public void AddButtons(){
         // group buttons together
         buttonArea = new JPanel();
         buttonArea.setLayout(new GridLayout(1, 3));
@@ -29,6 +88,7 @@ public class StopWatchController extends JFrame {
 
         // three buttons, each with a listener to trigger start
         startButton = new JButton("Start");
+
         startButton.addActionListener(this::ActionHandler);
 
         stopButton = new JButton("Stop");
@@ -41,48 +101,10 @@ public class StopWatchController extends JFrame {
         buttonArea.add(startButton);
         buttonArea.add(stopButton);
         buttonArea.add(resetButton);
-
-        // get model and view objects for display
-        model = new Models.Timer();
-        view = new View.StopWatch(model);
-
-        contentPane.add(view, BorderLayout.CENTER);
-
-        // create a timer using the swing.util
-        timer =
-                new Timer(100, e -> {
-
-                    // arithmatic to get timer to count properly
-                    int seconds = (int) (System.currentTimeMillis() - startTime) / 1000;
-                    int days = seconds / 86400;
-                    int hours = (seconds / 3600) - (days * 24);
-                    int min = (seconds / 60) - (days * 1440) - (hours * 60);
-                    int sec = seconds % 60;
-
-                    // pass new data to model
-                    model.setMinutes(min);
-                    model.setSeconds(sec);
-
-                    // update view to display new model values
-                    view.updateUI();
-                });
     }
 
-    public void ActionHandler(ActionEvent event)
-    {
-        if (event.getActionCommand().equals("Start")) {
-            startTime = System.currentTimeMillis();
-            timer.start();
-        }
-        else if (event.getActionCommand().equals("Reset")) {
-            startTime = System.currentTimeMillis();
-            timer.restart();
-        }
-
-        else if (event.getActionCommand().equals("Stop"))
-            timer.stop();
-
-        view.updateUI();
+    public void removeButtons(){
+        this.buttonArea.removeAll();
     }
 
     public static void main(String[] args) {

@@ -1,5 +1,7 @@
 package Controllers;
 
+import View.UserLogin;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,46 +13,48 @@ public class UserController extends JFrame {
     private JPanel nameArea, pwdArea;
     private Container contentPane;
     private JTextField  name,pwd;
-    private View.User view;
+    private UserLogin view;
     private Models.User model;
 
 
-    public UserController()
-    {
+    public UserController() {
+
         contentPane = getContentPane();
-        contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
         setSize(400, 400);
         setTitle("Welcome!");
 
-        nameArea = new JPanel();
-        pwdArea = new JPanel();
-        nameLabel = new JLabel("nameLabel");
-        nameLabel.setText("Username:");
+        JPanel area = new JPanel();
 
-        name = new JTextField(15);
-        name.setAlignmentX(Component.CENTER_ALIGNMENT);
+        nameLabel = new JLabel("Username: ");
 
-        pwdlabel = new JLabel("pwdlabel");
-        pwdlabel.setText("Password:");
-        pwd = new JPasswordField(15);
-        pwdlabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        area.add(nameLabel);
+
+        name = new JTextField(20);
+
+        area.add(name);
+
+        pwdlabel = new JLabel("Password: ");
+
+        area.add(pwdlabel);
+
+        pwd = new JPasswordField(20);
+
+        area.add(pwd);
 
         submit = new JButton("submit");
         submit.addActionListener(this::ActionHandler);
 
-        nameArea.add(nameLabel);
-        nameArea.add(name);
-        pwdArea.add(pwdlabel);
-        pwdArea.add(pwd);
+        contentPane.add(area, BorderLayout.WEST);
 
-        contentPane.add(nameArea, BorderLayout.WEST);
-        contentPane.add(pwdArea, BorderLayout.WEST);
+       // contentPane.add(pwdArea, BorderLayout.WEST);
         contentPane.add(submit, BorderLayout.SOUTH);
-
         model = new Models.User();
-        view = new View.User(model);
+        view = new UserLogin(model);
 
         contentPane.add(view, BorderLayout.CENTER);
+
+        view.updateUI();
+        pack();
     }
 
     public void ActionHandler(ActionEvent ae)
@@ -65,12 +69,11 @@ public class UserController extends JFrame {
             //view.getContentPane().add(label);
             model.setName(nameIn);
             model.setPassword(pwdIN);
+            view.repaint();
             view.updateUI();
-
         }
         else {
-            JOptionPane.showMessageDialog(this,"Incorrect username or password",
-                    "Error",JOptionPane.ERROR_MESSAGE);
+            view.errorPopUp();
         }
     }
 
