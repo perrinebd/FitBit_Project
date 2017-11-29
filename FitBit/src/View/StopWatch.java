@@ -20,9 +20,11 @@ public class StopWatch extends JPanel {
         int minutes = (int) model.getMinutes();
         int seconds = (int) model.getSeconds();
 
+        currPane.setFont(new Font("Helvetica", Font.BOLD, 40));
         // render info
         String displayText = String.format("%d m : %d s", minutes, seconds);
-        currPane.drawString(displayText, 120, 120);
+        currPane.drawString(displayText, 50, 50);
 
     }
 }
+
