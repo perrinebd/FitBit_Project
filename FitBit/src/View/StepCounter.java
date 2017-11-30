@@ -5,10 +5,12 @@ import java.awt.*;
 public class StepCounter extends JPanel {
     private Models.StepCounter model;
     private Graphics2D currPane;
+    private boolean firstTime;
 
     // pass the view a model to render
     public StepCounter(Models.StepCounter count) {
         this.model = count;
+        firstTime = true;
     }
 
     public void paintComponent(Graphics g) {
@@ -19,13 +21,16 @@ public class StepCounter extends JPanel {
 
         // model info to display
         int steps = model.getDisplaySteps();
-        model.setCurrSteps(3);
-        model.setDisplaySteps(0);
+        if (firstTime) {
+        	System.out.println("Hi");
+        	model.setDisplaySteps(0);
+        	firstTime = false;
+        }
 
         currPane.setFont(new Font("Helvetica", Font.BOLD, 40));
         // render info
         String displayText = String.format("%d", steps);
-        currPane.drawString(displayText, 50, 50);
+        currPane.drawString(displayText, 180, 50);
     }
 
     public void removeComponent(){
