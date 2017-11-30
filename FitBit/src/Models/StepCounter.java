@@ -36,6 +36,5 @@ public class StepCounter {
 
     public void setDisplaySteps(int displaySteps) {
         this.displaySteps = displaySteps;
-        System.out.println(displaySteps);
     }
 }
