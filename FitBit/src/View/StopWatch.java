@@ -4,12 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 
 public class StopWatch extends JPanel {
-    private Models.Timer model;
+    private Models.TimerModel model;
     private boolean display = true;
     Graphics2D currPane;
 
     // pass the view a model to render
-    public StopWatch(Models.Timer timer) {
+    public StopWatch(Models.TimerModel timer) {
         this.model = timer;
     }
 

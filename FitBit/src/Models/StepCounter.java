@@ -31,7 +31,7 @@ public class StepCounter {
     }
 
     public int getDisplaySteps() {
-        return currSteps;
+        return displaySteps;
     }
 
     public void setDisplaySteps(int displaySteps) {

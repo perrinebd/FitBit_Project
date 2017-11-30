@@ -16,7 +16,7 @@ public class StopWatchController extends JFrame implements ActionListener{
     private Container contentPane;
     private View.StopWatch view;
     private View.ViewSelector selectorView;
-    private Models.Timer model;
+    private Models.TimerModel model;
     private StopWatchController controller;
     private Timer timer;
     private long startTime;
@@ -32,7 +32,7 @@ public class StopWatchController extends JFrame implements ActionListener{
         AddButtons("Start", "Stop", "Change View");
 
         // get model and view objects for display
-        model = new Models.Timer();
+        model = new Models.TimerModel();
         view = CreateView();
         contentPane.add(view, BorderLayout.CENTER);
         
