@@ -38,7 +38,6 @@ public class StepCounterController extends JFrame implements ActionListener{
     	
         if (event.getActionCommand().equals("Total")) {
            int total = model.getTotalSteps();
-           //System.out.println(total);
            model.setDisplaySteps(total);
         }
         else if (event.getActionCommand().equals("Log")){
@@ -64,12 +63,10 @@ public class StepCounterController extends JFrame implements ActionListener{
 
     public void AddButtons(String lName, String cName, String rName, String sName) {
 
-        // group buttons in grid for contentPane
         buttonArea = new JPanel();
         buttonArea.setLayout(new GridLayout(1, 4));
         contentPane.add(buttonArea, BorderLayout.SOUTH);
 
-        // two buttons representing taps on either screen side
         leftButton = new JButton(lName);
         leftButton.addActionListener(this::actionPerformed);
 
