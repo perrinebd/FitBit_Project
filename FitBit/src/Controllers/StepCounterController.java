@@ -13,9 +13,14 @@ public class StepCounterController extends JFrame implements ActionListener{
     private JButton rightButton, leftButton;
     private Models.StepCounter model;
     private View.StepCounter view;
+    private View.ViewSelector selectorView;
+    private StepCounterController controller;
 
 
     public StepCounterController(){
+    	
+    	controller = new StepCounterController();
+    	
         contentPane = getContentPane();
         setSize(250, 150);
         setTitle("Stop Watch");
@@ -23,7 +28,9 @@ public class StepCounterController extends JFrame implements ActionListener{
 
         model = new Models.StepCounter();
         view = CreateView();
+        selectorView = new View.ViewSelector(controller);
         contentPane.add(view, BorderLayout.CENTER);
+        contentPane.add(selectorView, BorderLayout.EAST);
     }
 
     private StepCounter CreateView(){

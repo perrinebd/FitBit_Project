@@ -1,6 +1,7 @@
 package Controllers;
 
 import View.UserLogin;
+import View.ViewSelector;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,11 +15,15 @@ public class UserController extends JFrame {
     private Container contentPane;
     private JTextField  name,pwd;
     private UserLogin view;
+    private ViewSelector selectorView;
+    private UserController controller;
     private Models.User model;
 
 
     public UserController() {
 
+    	controller = new UserController();
+    	
         contentPane = getContentPane();
         setSize(400, 400);
         setTitle("Welcome!");
@@ -50,8 +55,10 @@ public class UserController extends JFrame {
         contentPane.add(submit, BorderLayout.SOUTH);
         model = new Models.User();
         view = new UserLogin(model);
+        selectorView = new ViewSelector(controller);
 
         contentPane.add(view, BorderLayout.CENTER);
+        contentPane.add(selectorView, BorderLayout.EAST);
 
         view.updateUI();
         pack();
