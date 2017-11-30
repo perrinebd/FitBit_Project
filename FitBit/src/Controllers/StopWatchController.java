@@ -1,6 +1,7 @@
 package Controllers;
 
 import View.StopWatch;
+import View.ViewSelector;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,12 +15,16 @@ public class StopWatchController extends JFrame implements ActionListener{
     private JPanel buttonArea;
     private Container contentPane;
     private View.StopWatch view;
+    private View.ViewSelector selectorView;
     private Models.Timer model;
+    private StopWatchController controller;
     private Timer timer;
     private long startTime;
 
     public StopWatchController() {
 
+    	controller = new StopWatchController();
+    	
         // create GUI info for stopwatch
         contentPane = getContentPane();
         setSize(250, 150);
@@ -29,7 +34,10 @@ public class StopWatchController extends JFrame implements ActionListener{
         // get model and view objects for display
         model = new Models.Timer();
         view = CreateView();
+        selectorView = new ViewSelector(controller);
         contentPane.add(view, BorderLayout.CENTER);
+        contentPane.add(selectorView, BorderLayout.EAST);
+        
 
         timer = CreateTimer();
 
