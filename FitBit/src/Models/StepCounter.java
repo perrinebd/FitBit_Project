@@ -15,6 +15,7 @@ public class StepCounter {
 
     public void logCurrSteps(){
         totalSteps += currSteps;
+        currSteps = 0;
     }
 
     public int getCurrSteps() {
@@ -30,7 +31,7 @@ public class StepCounter {
     }
 
     public int getDisplaySteps() {
-        return displaySteps;
+        return currSteps;
     }
 
     public void setDisplaySteps(int displaySteps) {

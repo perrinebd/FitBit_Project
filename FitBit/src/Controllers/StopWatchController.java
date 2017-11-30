@@ -32,7 +32,6 @@ public class StopWatchController extends JFrame implements ActionListener{
         contentPane.add(view, BorderLayout.CENTER);
 
         timer = CreateTimer();
-
     }
 
     private StopWatch CreateView(){
