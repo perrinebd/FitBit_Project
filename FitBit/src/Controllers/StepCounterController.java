@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 public class StepCounterController extends JFrame implements ActionListener{
     private Container contentPane;
     private JPanel buttonArea;
-    private JButton rightButton, leftButton;
+    private JButton rightButton, leftButton, centerButton;
     private Models.StepCounter model;
     private View.StepCounter view;
     private View.ViewSelector selectorView;
@@ -19,16 +19,16 @@ public class StepCounterController extends JFrame implements ActionListener{
 
     public StepCounterController(){
     	
-    	controller = new StepCounterController();
+    	//controller = new StepCounterController();
     	
         contentPane = getContentPane();
         setSize(250, 150);
         setTitle("Stop Watch");
-        AddButtons("Total", "Log");
+        AddButtons("Total", "Log", "Change View");
 
         model = new Models.StepCounter();
         view = CreateView();
-        selectorView = new View.ViewSelector(controller);
+        selectorView = new View.ViewSelector();
         contentPane.add(view, BorderLayout.CENTER);
         contentPane.add(selectorView, BorderLayout.EAST);
     }
@@ -46,6 +46,11 @@ public class StepCounterController extends JFrame implements ActionListener{
         else if (event.getActionCommand().equals("Log")){
             model.logCurrSteps();
         }
+        else if (event.getActionCommand().equals("Change View")) {
+        	ViewSelectorController controller = new ViewSelectorController();
+        	controller.setVisible(true);
+        	this.dispose();
+        }
         else if (event.getActionCommand().equals(""))
             System.out.print("f");
 
@@ -53,22 +58,26 @@ public class StepCounterController extends JFrame implements ActionListener{
 
     }
 
-    public void AddButtons(String lName, String rName) {
+    public void AddButtons(String lName, String cName, String rName) {
 
         // group buttons in grid for contentPane
         buttonArea = new JPanel();
-        buttonArea.setLayout(new GridLayout(1, 2));
+        buttonArea.setLayout(new GridLayout(1, 3));
         contentPane.add(buttonArea, BorderLayout.SOUTH);
 
         // two buttons representing taps on either screen side
         leftButton = new JButton(lName);
         leftButton.addActionListener(this::actionPerformed);
 
+        centerButton = new JButton(cName);
+        centerButton.addActionListener(this::actionPerformed);
+        
         rightButton = new JButton(rName);
         rightButton.addActionListener(this::actionPerformed);
 
         // add buttons to the button area
         buttonArea.add(leftButton);
+        buttonArea.add(centerButton);
         buttonArea.add(rightButton);
     }
 
