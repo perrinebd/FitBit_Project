@@ -19,8 +19,8 @@ public class StepCounter extends JPanel {
 
         // model info to display
         int steps = model.getDisplaySteps();
-        model.setTotalSteps(1);
         model.setCurrSteps(3);
+        model.setDisplaySteps(0);
 
         currPane.setFont(new Font("Helvetica", Font.BOLD, 40));
         // render info

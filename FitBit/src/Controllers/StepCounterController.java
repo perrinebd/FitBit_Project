@@ -40,13 +40,13 @@ public class StepCounterController extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent event)
     {
         if (event.getActionCommand().equals("Total")) {
-           model.setDisplaySteps(model.getTotalSteps());
+           int total = model.getTotalSteps();
+           model.setDisplaySteps(total);
         }
         else if (event.getActionCommand().equals("Log")){
             model.logCurrSteps();
-            model.setDisplaySteps(model.getTotalSteps());
         }
-        else if (event.getActionCommand().equals("Stop"))
+        else if (event.getActionCommand().equals(""))
             System.out.print("f");
 
         this.view.updateUI();
@@ -74,6 +74,16 @@ public class StepCounterController extends JFrame implements ActionListener{
 
     public static void main(String[] args) {
         StepCounterController controller = new StepCounterController();
+        for (int i = 0; i < 100; i++) {
+            Timer timer = new Timer(20, event -> {
+                controller.model.addSteps();
+                int currSteps = controller.model.getCurrSteps();
+                controller.model.setDisplaySteps(currSteps);
+;                controller.view.updateUI();
+            });
+            timer.setDelay(100);
+        }
+
         controller.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         controller.setVisible(true);
     }

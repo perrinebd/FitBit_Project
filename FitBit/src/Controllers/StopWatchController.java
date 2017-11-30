@@ -40,7 +40,6 @@ public class StopWatchController extends JFrame implements ActionListener{
         
 
         timer = CreateTimer();
-
     }
 
     private StopWatch CreateView(){
