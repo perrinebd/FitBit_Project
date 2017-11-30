@@ -2,68 +2,75 @@ package Controllers;
 
 import java.awt.*;
 import javax.swing.*;
+
+import View.ViewSelector;
+
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 public class ViewSelectorController extends JFrame {
-	private JPanel checkBoxPanel = new JPanel();
-    private JCheckBox checkBoxWatch = new JCheckBox();
-    private JCheckBox checkBoxStep = new JCheckBox();
-    private JCheckBox checkBoxHRM = new JCheckBox();
-    private JCheckBox checkBoxUser = new JCheckBox();
-	
-	public ViewSelectorController() {
+    private JFrame currFrame;
+	private JPanel checkBoxPanel;
+    private Container contentPane;
+	private JCheckBox checkBoxWatch;
+	private JCheckBox checkBoxStep;
+	private JCheckBox checkBoxHRM;
+	private JCheckBox checkBoxUser;
+    private ViewSelector view;
+
+    public ViewSelectorController() {
+    	
+    	contentPane = getContentPane();
+    	setSize(200, 175);
+    	setTitle("View Selection");
+    	currFrame = new JFrame();
+    	checkBoxPanel = new JPanel();
+    	checkBoxWatch = new JCheckBox("Stopwatch");
+    	checkBoxStep = new JCheckBox("Step Counter");
+    	checkBoxHRM = new JCheckBox("Heart Rate Monitor");
+    	checkBoxUser = new JCheckBox("User Login");
     
 		checkBoxPanel.add(checkBoxWatch);
 		checkBoxPanel.add(checkBoxStep);
 		checkBoxPanel.add(checkBoxHRM);
 		checkBoxPanel.add(checkBoxUser);
+		
+		view = new View.ViewSelector();
+		
+		contentPane.add(view, BorderLayout.CENTER);
+		contentPane.add(checkBoxPanel, BorderLayout.CENTER);
 	
-		checkBoxWatch.addItemListener(new ItemListener() {
-		
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				if (checkBoxWatch.isSelected()) {
-					
-					StopWatchController stopFrame = new StopWatchController();
-					stopFrame.setVisible(true);
-				}
-			}
-		});
-		checkBoxStep.addItemListener(new ItemListener() {
-		
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				if (checkBoxStep.isSelected()) {
-					
-					StepCounterController stepFrame = new StepCounterController();
-					stepFrame.setVisible(true);
-				}
-			}
-		});
-		checkBoxHRM.addItemListener(new ItemListener() {
-	    	
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				if (checkBoxHRM.isSelected()) {
-					
-					//HRMController hRMFrame = new HRMController();
-					//hRMFrame.setVisible(true);
-				}
-			}
-		});
-		checkBoxUser.addItemListener(new ItemListener() {
-	    	
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				if (checkBoxUser.isSelected()) {
-					
-					UserController userFrame = new UserController();
-					userFrame.setVisible(true);
-				}
-			}
-		});
+		checkBoxWatch.addItemListener(this::itemChecked);
+		checkBoxStep.addItemListener(this::itemChecked);
+		checkBoxHRM.addItemListener(this::itemChecked);
+		checkBoxUser.addItemListener(this::itemChecked); 
+
 	}
+    
+    public void itemChecked(ItemEvent event) {
+    	
+    	if (checkBoxWatch.isSelected()) {
+			StopWatchController stopFrame = new StopWatchController();
+			stopFrame.setVisible(true);
+			this.dispose();
+		}
+    	if (checkBoxStep.isSelected()) {
+			StepCounterController stepFrame = new StepCounterController();
+			stepFrame.setVisible(true);
+			this.dispose();
+		}
+    	if (checkBoxHRM.isSelected()) {
+			//HRMController hRMFrame = new HRMController();
+			//hRMFrame.setVisible(true);
+    		//this.dispose();
+		}
+		if (checkBoxUser.isSelected()) {
+			UserController userFrame = new UserController();
+			userFrame.setVisible(true);
+			this.dispose();
+		}
+    	
+    }
 
 	public static void main(String[] args) {
 		ViewSelectorController controller = new ViewSelectorController();
