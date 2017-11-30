@@ -22,7 +22,6 @@ public class StepCounter extends JPanel {
         // model info to display
         int steps = model.getDisplaySteps();
         if (firstTime) {
-        	System.out.println("Hi");
         	model.setDisplaySteps(0);
         	firstTime = false;
         }
