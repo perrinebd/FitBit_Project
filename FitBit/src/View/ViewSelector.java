@@ -18,10 +18,8 @@ public class ViewSelector extends JPanel {
 	private JCheckBox checkBoxStep;
 	private JCheckBox checkBoxHRM;
 	private JCheckBox checkBoxUser;
-	private Models.TimerModel clock;
 
-    public ViewSelector(Models.TimerModel timer) {
-    	this.clock = timer;
+    public ViewSelector() {
     }
   
 
@@ -30,8 +28,6 @@ public class ViewSelector extends JPanel {
         // create new pane to paint from base Graphic obj g
         super.paintComponent(g);
         currPane = (Graphics2D) g;
-        
-        int clockHour = (int) clock.getHour();
         
         currPane.setFont(new Font("Helvetica", Font.BOLD, 10));
         String stepText = String.format("Step Counter");
