@@ -3,7 +3,6 @@ package Controllers;
 import java.awt.*;
 import javax.swing.*;
 
-import View.StopWatch;
 import View.ViewSelector;
 
 import java.awt.event.ItemEvent;
@@ -38,7 +37,7 @@ public class ViewSelectorController extends JFrame {
 		checkBoxPanel.add(checkBoxHRM);
 		checkBoxPanel.add(checkBoxUser);
 		
-		view = CreateView();
+		view = new View.ViewSelector();
 		
 		contentPane.add(view, BorderLayout.SOUTH);
 		contentPane.add(checkBoxPanel, BorderLayout.CENTER);
@@ -49,10 +48,6 @@ public class ViewSelectorController extends JFrame {
 		checkBoxUser.addItemListener(this::itemChecked);
 
 	}
-    
-    private ViewSelector CreateView(){
-        return new View.ViewSelector(clock);
-    }
     
     public void itemChecked(ItemEvent event) {
     	
