@@ -17,6 +17,7 @@ public class StopWatchController extends JFrame implements ActionListener{
     private View.StopWatch view;
     private View.ViewSelector selectorView;
     private Models.TimerModel model;
+    private Models.TimerModel clock;
     private StopWatchController controller;
     private Timer timer;
     private long startTime;
@@ -36,7 +37,6 @@ public class StopWatchController extends JFrame implements ActionListener{
         view = CreateView();
         contentPane.add(view, BorderLayout.CENTER);
         
-
         timer = CreateTimer();
     }
 
@@ -47,17 +47,19 @@ public class StopWatchController extends JFrame implements ActionListener{
     private Timer CreateTimer(){
         return new Timer(100, e -> {
 
-            // arithmatic to get timer to count properly
+            // Arithmetic to get timer to count properly
             int seconds = (int) (System.currentTimeMillis() - startTime) / 1000;
+            System.out.println(seconds);
             int days = seconds / 86400;
             int hours = (seconds / 3600) - (days * 24);
             int min = (seconds / 60) - (days * 1440) - (hours * 60);
             int sec = seconds % 60;
 
             // pass new data to model
+            model.setHour(hours);
             model.setMinutes(min);
             model.setSeconds(sec);
-
+            
             // update view to display new model values
             view.updateUI();
         });

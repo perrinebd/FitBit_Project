@@ -1,6 +1,9 @@
 package View;
 
 import javax.swing.*;
+
+import Models.TimerModel;
+
 import java.awt.*;
 
 public class StopWatch extends JPanel {
