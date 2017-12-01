@@ -8,6 +8,7 @@ public class TimerModel {
     private long stopTime;
     private long minutes;
     private long seconds;
+    private long hour;
 
     public float getTotal() {
         return total;
@@ -49,6 +50,14 @@ public class TimerModel {
 
     public void setStopTime(long stopTime) {
         this.stopTime = stopTime;
+    }
+    
+    public long getHour() {
+    	return hour;
+    }
+    
+    public void setHour(long hour) {
+    	this.hour = hour;
     }
 
     public long getMinutes() {
