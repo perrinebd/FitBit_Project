@@ -1,5 +1,6 @@
 # BitFit
 360 Project
+
 Brett Perrine & Luke Bradley
 
 BitFit is an application that simulates gathering, accepting, and displaying data from an accelerometer and stopwatch.
