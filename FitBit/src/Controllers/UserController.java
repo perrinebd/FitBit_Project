@@ -1,3 +1,10 @@
+/* Name: Team BitFit
+ * Class: UserController.java
+ * 
+ * Functions as Controller for UserLogin menu; creates layout, Model and View,
+ * dictates behavior of layout objects.
+ */
+
 package Controllers;
 
 import View.UserLogin;
@@ -21,13 +28,13 @@ public class UserController extends JFrame {
 
 
     public UserController() {
-
-    	//controller = new UserController();
     	
+    	// create GUI info for user login
         contentPane = getContentPane();
         setSize(600, 600);
         setTitle("Welcome!");
 
+        // create layout objects and add them to JPanel area
         JPanel area = new JPanel();
 
         nameLabel = new JLabel("Username: ");
@@ -50,7 +57,7 @@ public class UserController extends JFrame {
         
         AddButtons("submit", "Change View");
 
-       // contentPane.add(pwdArea, BorderLayout.WEST);
+        // create UserLogin Model and View for display
         model = new Models.User();
         view = new UserLogin(model);
 
@@ -76,13 +83,16 @@ public class UserController extends JFrame {
         buttonArea.add(changeView);
     }
 
+    // behavior of layout objects
     public void ActionHandler(ActionEvent ae)
     {
         String nameIn = name.getText();
         String pwdIN = pwd.getText();
         
+        // if "Submit" button is pressed
         if (ae.getActionCommand().equals("submit")) { 
 
+        	// set name and password if correct; repaint and update View
 	        if (nameIn.equals("perrinebd") && pwdIN.equals("ntadmin")) {
 	          //  NextPage page=new NextPage();
 	          //  page.setVisible(true);
@@ -97,6 +107,7 @@ public class UserController extends JFrame {
 	            view.errorPopUp();
 	        }
         }
+        // if "Change View" button is pressed, create ViewSelector window, close UserLogin window
         else if (ae.getActionCommand().equals("Change View")) {
         	ViewSelectorController controller = new ViewSelectorController();
         	controller.setVisible(true);
@@ -104,6 +115,7 @@ public class UserController extends JFrame {
         }
     }
 
+    // creation of UserController and display
     public static void main(String[] args)
     {
        UserController controller = new UserController();
