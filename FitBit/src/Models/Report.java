@@ -1,3 +1,9 @@
+/* Name: Team BitFit
+ * Class: Report.java
+ * 
+ * Functions as Model for a Report object; contains all Report attributes and set/get methods.
+ */
+
 package Models;
 
 import java.util.Date;

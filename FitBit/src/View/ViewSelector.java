@@ -1,3 +1,10 @@
+/* Name: Team BitFit
+ * Class: ViewSelector.java
+ * 
+ * Functions as View for a ViewSelector window; dictates the layout of window and how it updates
+ * with new data.
+ */
+
 package View;
 
 import javax.swing.*;
@@ -21,7 +28,6 @@ public class ViewSelector extends JPanel {
 
     public ViewSelector() {
     }
-  
 
     public void paintComponent(Graphics g) {
 
@@ -29,12 +35,14 @@ public class ViewSelector extends JPanel {
         super.paintComponent(g);
         currPane = (Graphics2D) g;
         
+        // model info to display
         currPane.setFont(new Font("Helvetica", Font.BOLD, 10));
         String stepText = String.format("Step Counter");
         String stopText = String.format("Stopwatch");
         String hrmText = String.format("Heart Rate Monitor");
         String userText = String.format("User Login");
         
+        // render info
         currPane.drawString(stepText, 50, 50);
         currPane.drawString(stopText, 100, 50);
         currPane.drawString(hrmText, 50, 100);

@@ -1,3 +1,10 @@
+/* Name: Team BitFit
+ * Class: StopWatchController.java
+ * 
+ * Functions as Controller for StopWatch menu; creates layout, Model and View,
+ * dictates behavior of layout objects.
+ */
+
 package Controllers;
 
 import View.StopWatch;
@@ -15,18 +22,13 @@ public class StopWatchController extends JFrame implements ActionListener{
     private JPanel buttonArea;
     private Container contentPane;
     private View.StopWatch view;
-    private View.ViewSelector selectorView;
     private Models.TimerModel model;
-    private Models.TimerModel clock;
-    private StopWatchController controller;
     private Timer timer;
     private long startTime;
 
     public StopWatchController() {
-
-    	//controller = new StopWatchController();
     	
-        // create GUI info for stopwatch
+        // create GUI info for stop watch
         contentPane = getContentPane();
         setSize(250, 150);
         setTitle("Stop Watch");
@@ -37,6 +39,7 @@ public class StopWatchController extends JFrame implements ActionListener{
         view = CreateView();
         contentPane.add(view, BorderLayout.CENTER);
         
+        // get Timer to update stop watch display
         timer = CreateTimer();
     }
 
@@ -44,6 +47,7 @@ public class StopWatchController extends JFrame implements ActionListener{
         return new View.StopWatch(model);
     }
 
+    // update stop watch display every second
     private Timer CreateTimer(){
         return new Timer(100, e -> {
 
@@ -65,8 +69,11 @@ public class StopWatchController extends JFrame implements ActionListener{
         });
     }
 
+    // behavior for layout buttons
     public void actionPerformed(ActionEvent event)
     {
+    	// if user selects "Start" button, startTime resets to 0, timer starts, and
+    	// "Start" button is changed to "Reset" button
         if (event.getActionCommand().equals("Start")) {
             this.startTime = System.currentTimeMillis();
             this.timer.start();
@@ -74,23 +81,27 @@ public class StopWatchController extends JFrame implements ActionListener{
             this.leftButton.setActionCommand("Reset");
 
         }
+        // if user selects "Reset" button, startTime resets to 0 and timer restarts
         else if (event.getActionCommand().equals("Reset")){
             this.startTime = System.currentTimeMillis();
             this.timer.restart();
         }
+        // if user selects "Stop" button, timer stops
         else if (event.getActionCommand().equals("Stop")) {
             this.timer.stop();
         }
+        // if "Change View" button is pressed, create ViewSelector window and close StopWatch window
         else if (event.getActionCommand().equals("Change View")) {
         	ViewSelectorController controller = new ViewSelectorController();
         	controller.setVisible(true);
         	this.dispose();
         }
 
-
+      // update view with new data values
       this.view.updateUI();
     }
 
+    // adding buttons to JPanel, and JPanel to overall layout
     public void AddButtons(String lName, String cName, String rName) {
 
         // group buttons in grid for contentPane
@@ -98,7 +109,7 @@ public class StopWatchController extends JFrame implements ActionListener{
         buttonArea.setLayout(new GridLayout(1, 3));
         contentPane.add(buttonArea, BorderLayout.SOUTH);
 
-        // two buttons representing taps on either screen side
+        // three buttons representing taps on screen
         leftButton = new JButton(lName);
         leftButton.addActionListener(this::actionPerformed);
 
@@ -120,6 +131,7 @@ public class StopWatchController extends JFrame implements ActionListener{
         this.contentPane.remove(buttonArea);
     }
 
+    // create StopWatchController and display it
     public static void main(String[] args) {
         StopWatchController controller = new StopWatchController();
         controller.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

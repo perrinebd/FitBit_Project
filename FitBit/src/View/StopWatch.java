@@ -1,3 +1,10 @@
+/* Name: Team BitFit
+ * Class: StopWatch.java
+ * 
+ * Functions as View for a StepCounter window; dictates the layout of window and how it updates
+ * with new data.
+ */
+
 package View;
 
 import javax.swing.*;

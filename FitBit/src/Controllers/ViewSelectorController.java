@@ -1,3 +1,10 @@
+/* Name: Team BitFit
+ * Class: ViewSelectorController.java
+ * 
+ * Functions as Controller for ViewSelector menu; creates layout and View,
+ * dictates behavior of layout objects.
+ */
+
 package Controllers;
 
 import java.awt.*;
@@ -21,6 +28,7 @@ public class ViewSelectorController extends JFrame {
 
     public ViewSelectorController() {
     	
+    	// create GUI info for view selector
     	contentPane = getContentPane();
     	setSize(200, 175);
     	setTitle("View Selection");
@@ -36,11 +44,13 @@ public class ViewSelectorController extends JFrame {
 		checkBoxPanel.add(checkBoxHRM);
 		checkBoxPanel.add(checkBoxUser);
 		
+		//creates UI window
 		view = CreateView();
 		
 		contentPane.add(view, BorderLayout.SOUTH);
 		contentPane.add(checkBoxPanel, BorderLayout.CENTER);
-	
+		
+		//checkbox functionality
 		checkBoxWatch.addItemListener(this::itemChecked);
 		checkBoxStep.addItemListener(this::itemChecked);
 		checkBoxHRM.addItemListener(this::itemChecked);
@@ -52,23 +62,28 @@ public class ViewSelectorController extends JFrame {
         return new View.ViewSelector();
     }
     
+    // changing view windows based on checkbox selected
     public void itemChecked(ItemEvent event) {
     	
+    	// change view to StopWatch, close ViewSelector view
     	if (checkBoxWatch.isSelected()) {
 			StopWatchController stopFrame = new StopWatchController();
 			stopFrame.setVisible(true);
 			this.dispose();
 		}
+    	// change view to StepCounter, close ViewSelector view
     	if (checkBoxStep.isSelected()) {
 			StepCounterController stepFrame = new StepCounterController();
 			stepFrame.setVisible(true);
 			this.dispose();
 		}
+    	// change view to HRMMonitor, close ViewSelector view
     	if (checkBoxHRM.isSelected()) {
 			//HRMController hRMFrame = new HRMController();
 			//hRMFrame.setVisible(true);
     		//this.dispose();
 		}
+    	// change view to UserLogin, close ViewSelector view
 		if (checkBoxUser.isSelected()) {
 			UserController userFrame = new UserController();
 			userFrame.setVisible(true);
@@ -77,6 +92,7 @@ public class ViewSelectorController extends JFrame {
     	
     }
 
+    // creation of ViewSelectorController and display
 	public static void main(String[] args) {
 		ViewSelectorController controller = new ViewSelectorController();
 		controller.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

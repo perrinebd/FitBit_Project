@@ -1,3 +1,9 @@
+/* Name: Team BitFit
+ * Class: HRMonitor.java
+ * 
+ * Functions as Model for a HRMonitor object; contains all HRMonitor attributes and set/get methods.
+ */
+
 package Models;
 
 import java.sql.Time;
