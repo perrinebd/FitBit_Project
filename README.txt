@@ -23,11 +23,8 @@ Here's how to set it up:
 
 
 
-You will begin the program in the ViewSelector menu. You can either choose the StepCounter or the StopWatch checkboxes
-(the Heart Rate Monitor box does not have full implementation at this time). 
-After you select one of the two checkboxes,
-the window corresponding to that checkbox will open.
-
+You will begin the program in the ViewSelector menu. Run the main method of this class to open the selector window.  Here you will be presented with two checkboxes, each of which will take you to a new window designated by the name to the right of the box.
+After you select one of the two checkboxes,the window corresponding to that checkbox will open.  See below for information on how to proceed once you've moved past the selector menu.
 
 
 # StepCounter:
