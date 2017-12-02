@@ -1,3 +1,9 @@
+/* Name: Team BitFit
+ * Class: User.java
+ * 
+ * Functions as Model for a User object; contains all User attributes and set/get methods.
+ */
+
 package Models;
 
 import java.util.Date;
@@ -92,6 +98,7 @@ public class User {
         return dailyStepTotal;
     }
 
+    // maps key/value data pairs for mapping step totals with their corresponding days
     public void setDailyStepTotal(Dictionary<Integer, Date> dailyStepTotal) {
         this.dailyStepTotal = dailyStepTotal;
     }

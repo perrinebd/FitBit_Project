@@ -1,3 +1,9 @@
+/* Name: Team BitFit
+ * Class: TimerModel.java
+ * 
+ * Functions as Model for a TimerModel object for StopWatch; contains all TimerModel attributes and set/get methods.
+ */
+
 package Models;
 
 public class TimerModel {
