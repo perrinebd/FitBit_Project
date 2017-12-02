@@ -1,3 +1,10 @@
+/* Name: Team BitFit
+ * Class: StepCounter.java
+ * 
+ * Functions as View for a StepCounter window; dictates the layout of window and how it updates
+ * with new data.
+ */
+
 package View;
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +17,6 @@ public class StepCounter extends JPanel {
     // pass the view a model to render
     public StepCounter(Models.StepCounter count) {
         this.model = count;
-        firstTime = true;
     }
 
     public void paintComponent(Graphics g) {
@@ -22,10 +28,6 @@ public class StepCounter extends JPanel {
         // model info to display
         int steps = model.getDisplaySteps();
         int totalSteps = model.getTotalSteps();
-        if (firstTime) {
-        	model.setDisplaySteps(0);
-        	firstTime = false;
-        }
 
         currPane.setFont(new Font("Helvetica", Font.BOLD, 40));
         // render info

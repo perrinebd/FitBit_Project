@@ -1,3 +1,10 @@
+/* Name: Team BitFit
+ * Class: UserLogin.java
+ * 
+ * Functions as View for a UserLogin window; dictates the layout of window and how it updates
+ * with new data.
+ */
+
 package View;
 
 import javax.swing.*;
@@ -9,8 +16,6 @@ public class UserLogin extends JPanel{
     // pass the view a model to render
     public UserLogin(Models.User user) {
         this.model = user;
-
-
     }
 
     @Override
